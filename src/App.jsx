@@ -23,11 +23,11 @@ class App extends Component {
 
   handleFormSubmission = (event) => {
     event.preventDefault();
-    // const meal = this.state.meal;
     const { name, calories, image } = this.state;
     console.log(name, calories, image);
     this.setState({
-      meals: [...this.state.meals, { name, calories, image }]
+      meals: [...this.state.meals, { name, calories, image }],
+      viewForm: false
     });
   };
 
@@ -97,9 +97,9 @@ class App extends Component {
             return (
               <MealBox
                 key={meal.name}
-                image={meal.image}
                 name={meal.name}
                 calories={meal.calories}
+                image={meal.image}
                 onChange={this.handleInputChange}
               />
             );
