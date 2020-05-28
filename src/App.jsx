@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 import meals from './meals.json';
+import MealBox from './component/mealbox';
 // import meals from './meals';
 // import Button from 'react-bootstrap/Button';
 // import Image from 'react-bootstrap/Image';
@@ -8,16 +9,6 @@ import meals from './meals.json';
 // import Form from 'react-bootstrap/Form';
 // import Container from 'react-bootstrap/Container'
 // import Media from 'react-bootstrap/Media'
-
-const MealBox = (props) => {
-  return (
-    <div>
-      <img className="img-small" src={props.image} alt={props.image} />
-      <h5> {props.name} </h5>
-      <small>{props.calories}</small>
-    </div>
-  );
-};
 
 class App extends Component {
   constructor() {
@@ -31,8 +22,8 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        {this.state.firstMeal.map((meal) => {
+      <div >
+        {this.state.meals.map((meal) => {
           return <MealBox image={meal.image} name={meal.name} calories={meal.calories} />;
         })}
       </div>
