@@ -23,10 +23,11 @@ class App extends Component {
 
   handleFormSubmission = (event) => {
     event.preventDefault();
-    const meal = this.state.meal;
+    // const meal = this.state.meal;
+    const { name, calories, image } = this.state;
+    console.log(name, calories, image);
     this.setState({
-      list: [...this.state.meals, { value: meal }],
-      meal: ''
+      meals: [...this.state.meals, { name, calories, image }]
     });
   };
 
@@ -51,7 +52,6 @@ class App extends Component {
     return (
       <div>
         <form>
-          <input className="no-border" type="number" value="1" />
           <button onClick={this.newMeal}> Add new meal </button>
         </form>
 
