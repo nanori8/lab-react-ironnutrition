@@ -15,20 +15,106 @@ class App extends Component {
     super();
     this.state = {
       meals: meals,
-      firstMeal: meals.slice(0, 1)
+      firstMeal: meals.slice(0, 1),
+      viewForm: false
     };
     console.log('meals', meals);
   }
 
-  render() {
+  handleFormSubmission = (event) => {
+    event.preventDefault();
+    const meal = this.state.meal;
+    this.setState({
+      list: [...this.state.meals, { value: meal }],
+      meal: ''
+    });
+  };
+
+  handleInputChange = (event) => {
+    const $domNode = event.target;
+    const value = $domNode.value;
+    const name = $domNode.name;
+
+    this.setState({
+      [name]: value
+    });
+  };
+
+  newMeal = (event) => {
+    event.preventDefault();
+    this.setState({
+      viewForm: true
+    });
+  };
+
+  render(props) {
     return (
-      <div >
-        {this.state.meals.map((meal) => {
-          return <MealBox image={meal.image} name={meal.name} calories={meal.calories} />;
-        })}
+      <div>
+        <form>
+          <input className="no-border" type="number" value="1" />
+          <button onClick={this.newMeal}> Add new meal </button>
+        </form>
+
+        <div>
+          {this.state.viewForm ? (
+            <div>
+              It's true
+              <form onSubmit={this.handleFormSubmission}>
+                <input
+                  className="form-new-meal"
+                  name="name"
+                  type="text"
+                  value={this.state.value}
+                  onChange={this.handleInputChange}
+                  placeholder="Insert name"
+                />
+                <input
+                  className="form-new-meal"
+                  name="calories"
+                  type="text"
+                  value={this.state.value}
+                  onChange={this.handleInputChange}
+                  placeholder="Insert number of calories"
+                />
+                <input
+                  className="form-new-meal"
+                  name="image"
+                  type="text"
+                  value={this.state.value}
+                  onChange={this.handleInputChange}
+                  placeholder="Insert image URL"
+                />
+                <button className="form-new-meal"> Add </button>
+              </form>
+            </div>
+          ) : (
+            <p>It's false{this.state.viewForm}</p>
+          )}
+        </div>
+
+        <div>
+          {this.state.meals.map((meal) => {
+            return (
+              <MealBox
+                key={meal.name}
+                image={meal.image}
+                name={meal.name}
+                calories={meal.calories}
+                onChange={this.handleInputChange}
+              />
+            );
+          })}
+        </div>
       </div>
     );
   }
 }
 
 export default App;
+
+{
+  /* <form>
+  <input className="no-border" type="number" value="1" name="calories" onChange={this.handleInputChange} />
+  <button onClick={this.newMeal}> Add </button>
+</form> */
+}

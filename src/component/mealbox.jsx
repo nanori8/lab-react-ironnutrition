@@ -8,10 +8,11 @@ const MealBox = (props) => {
         <h5> {props.name} </h5>
         <small>{props.calories} cal</small>
       </div>
-        <form >
+      <form >
           <input className="no-border" type="number" value="1" />
           <button >+</button>
         </form>
+
     </div>
   );
 };
